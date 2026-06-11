@@ -6,7 +6,7 @@ app = FastAPI(title="Legallis API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3001", "https://app.legallis.app.br"],
+    allow_origins=["http://localhost:3001", "https://app.legallis.app.br", "https://legallis-app.vercel.app"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
