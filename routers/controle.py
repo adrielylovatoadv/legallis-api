@@ -81,7 +81,7 @@ class InicialIn(BaseModel):
 # ── processos ─────────────────────────────────────────────────────────────────
 
 @router.get("/processos")
-def listar_processos(busca: str = "", andamento: str = "", finalizado: Optional[bool] = None):
+def listar_processos(busca: str = "", andamento: str = "", finalizado: Optional[bool] = None, responsavel: str = ""):
     data = _load()
     lista = data.get("processos", [])
     if busca:
@@ -95,6 +95,8 @@ def listar_processos(busca: str = "", andamento: str = "", finalizado: Optional[
         lista = [p for p in lista if andamento.upper() in (p.get("andamento") or "").upper()]
     if finalizado is not None:
         lista = [p for p in lista if bool(p.get("finalizado")) == finalizado]
+    if responsavel:
+        lista = [p for p in lista if (p.get("responsavel") or "").lower() == responsavel.lower()]
     return lista
 
 
